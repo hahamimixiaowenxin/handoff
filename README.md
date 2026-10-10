@@ -14,6 +14,8 @@
 |------|----------|
 | 交接、收工、交给明天 | 看当前对话和 git 状态，写下交接 |
 | 接着昨天、昨天做到哪、继续上次 | 读上次交接，用四行复述。你同意之前不改代码 |
+| 上一份交接 | 读覆盖前留下的那一份 |
+| 交接列表 | 列出所有项目的当前交接 |
 
 不能双击运行。`scripts/handoff.py` 要在终端里带命令执行，完整交接是在对话里说的。
 
@@ -24,7 +26,7 @@
 从本仓库克隆，放到 Cursor 能读到的 skill 目录。目录名用 `handoff`，里面要有 `SKILL.md`。个人 skill，所有项目都能用。
 
 ```bash
-git clone https://github.com/nuvcloud88-star/handoff.git
+git clone https://github.com/hahamimixiaowenxin/handoff.git
 mkdir -p ~/.cursor/skills
 ln -s "$(cd handoff && pwd)" ~/.cursor/skills/handoff
 ```
@@ -56,7 +58,7 @@ ln -s "$(cd handoff && pwd)" ~/.cursor/skills/handoff
 明天不要重做、不要顺手改的东西。
 ```
 
-文件在 `~/.cursor/handoffs/`，按项目路径分开。
+文件在 `~/.cursor/handoffs/`，按项目路径分开。再次保存时，上一份留在同名的 `.prev` 文件里，不进项目仓库。日期必须是当天，项目路径必须和当前工作区一致。四个小节缺一不可，空着就写「无」。「明天第一件」写成一件事，不要写成多条清单。
 
 ---
 
@@ -65,9 +67,11 @@ ln -s "$(cd handoff && pwd)" ~/.cursor/skills/handoff
 叙述由对话来写，脚本看不到聊天内容。它只负责查 git、算路径、读写文件。在本仓库目录下执行：
 
 ```bash
-python3 scripts/handoff.py collect   # 日期、项目路径、git 状态
-python3 scripts/handoff.py show      # 读上次交接；没有则退出码 1
-python3 scripts/handoff.py save      # 从标准输入覆盖写入
+python3 scripts/handoff.py collect   # 日期、项目路径、已有交接、未提交文件、git 状态
+python3 scripts/handoff.py show      # 读当前交接；没有则退出码 1
+python3 scripts/handoff.py prev      # 读上一份；没有则退出码 1
+python3 scripts/handoff.py list      # 列出所有项目的当前交接
+python3 scripts/handoff.py save      # 检查格式后覆盖写入
 ```
 
 需要 Python 3。
