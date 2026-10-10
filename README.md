@@ -21,13 +21,12 @@
 
 ## 安装
 
-把这个仓库放到 Cursor 能读到的 skill 目录，目录名用 `handoff`，里面要有 `SKILL.md`。
-
-个人 skill，所有项目都能用：
+从本仓库克隆，放到 Cursor 能读到的 skill 目录。目录名用 `handoff`，里面要有 `SKILL.md`。个人 skill，所有项目都能用。
 
 ```bash
+git clone https://github.com/nuvcloud88-star/handoff.git
 mkdir -p ~/.cursor/skills
-ln -s "/你的路径/handoff" ~/.cursor/skills/handoff
+ln -s "$(cd handoff && pwd)" ~/.cursor/skills/handoff
 ```
 
 装好后新开一个对话，再说「交接」。
